@@ -1,0 +1,20 @@
+name: Branch Name
+
+on: pull_request
+
+jobs:
+  branch-name-check:
+    name: Validate Branch Name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          PATTERN="^(feature|bugfix|hotfix|release)\/[a-z0-9._-]+$"
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
+            echo "::error::Branch name '$BRANCH_NAME' does not match the required pattern."
+            echo "Branch must follow: feature/*, bugfix/*, hotfix/*, release/*"
+            echo "Use lowercase letters, numbers, hyphens, dots, or underscores after the prefix."
+            exit 1
+          fi
+          echo "Branch name '$BRANCH_NAME' is valid."

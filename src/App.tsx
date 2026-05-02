@@ -15,7 +15,7 @@ interface IFormData{
 function App() {
   const { register, handleSubmit, formState: { errors } } = useForm<IFormData>({
     defaultValues: {
-      fullName: '',
+      fullName: 'Raviteja',
       email:'',
       phoneNumber: "",
       userName:'',
